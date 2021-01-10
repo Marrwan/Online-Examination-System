@@ -1,0 +1,15 @@
+<div class="card">
+    <div class="card-body">
+        <%- include('../partials/message'); %>
+      <h5 class="card-title">Question: <%=question.question%></h5>
+      <p class="card-text">A:  <%=question.optionA%></p>
+      <p class="card-text">B: <%=question.optionB%></p>
+      <p class="card-text">C: <%=question.optionC%></p>
+      <p class="card-text text-success">Answer: <%=question.Answer%></p>
+      <a href="/question/<%= course._id %>/<%=exam._id%>/<%=question._id%>/edit" class="btn btn-primary">Edit Question</a>
+      <form   action="/question/<%= course._id %>/<%=exam._id%>/<%=question._id%>?_method=DELETE" method="post">
+        <button class="btn btn-danger">Delete Question</button>
+        </form>
+      <a href="#" class="btn btn-primary">Go Back</a>
+    </div>
+  </div>

@@ -1,0 +1,77 @@
+<div class="top-content">
+    <div class="inner-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2 text">
+            <h1><strong>Edit <%= exam['exam_code'] %></strong></h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-3"><a href="/faculties/home" role="button" class="btn btn-info">Go Back!</a></div>
+          <div class="col-sm-6 form-box">
+            <div class="form-top">
+              <div class="form-top-left">
+                <h3>Create Exam</h3>
+                <p>Fill the form to <%= exam['exam_code'] %></p>
+              </div>
+            </div>
+            <%- include('../partials/message'); %>
+            <div class="form-bottom">
+              <form role="form" action="/exam/<%= course._id %>/<%= exam._id %>/edit?_method=PUT" method="post" class="login-form">
+          
+                <div class="form-group">
+                  <label for="form-exam_code" class="sr-only">Exam Code</label>
+                  <input id="form-exam_code" type="number" name="exam_code" placeholder="Exam code" class="form-exam_code form-control" value="<%=exam.exam_code%>">
+                </div>
+                <div class="form-group">
+                  <label for="form-instruction" class="sr-only">Instruction1</label>
+                  <input id="form-instruction" type="text" name="instruction1" placeholder="Instruction_1" class="form-instruction form-control" value="<%= exam.instruction1  %>">
+                </div>
+                <div class="form-group">
+                  <label for="form-instruction" class="sr-only">Instruction2</label>
+                  <input id="form-instruction" type="text" name="instruction2" placeholder="Instruction_2" class="form-instruction form-control" value="<%= exam.instruction2 %>">
+                </div>
+                <div class="form-group">
+                  <label for="form-instruction" class="sr-only">Instruction3</label>
+                  <input id="form-instruction" type="text" name="instruction3" placeholder="Instruction_3" class="form-instruction form-control" value="<%= exam.instruction3 %>">
+                </div>
+                <div class="form-group">
+                  <label for="form-instruction" class="sr-only">Instruction4</label>
+                  <input id="form-instruction" type="text" name="instruction4" placeholder="Instruction_4" class="form-instruction form-control" value="<%= exam.instruction4%>">
+                </div>
+                <div class="form-group">
+                  <label for="form-instruction" class="sr-only">Instruction5</label>
+                  <input id="form-instruction" type="text" name="instruction5" placeholder="Instruction_5" class="form-instruction form-control" value="<%= exam.instruction5 %>">
+                </div>
+                <div class="form-group">
+                  <p>Select No. of Hours</p>
+                  <label for="form-duration_hours" class="sr-only">Duration Hours</label>
+                  <select name="duration_hours">
+                    <option selected disabled>option</option>
+                    <option value="0">0</option> 
+                    <option value="1">1</option> 
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <p>Select No. of Minutes</p>
+                  <label for="form-duration_minutes" class="sr-only">Duration Minutes</label>
+                  <select name="duration_minutes">
+                    <option selected disabled>option</option>
+                    <option value="0">0</option>
+                    <option value="15">15</option>
+                    <option value="30">30</option>
+                    <option value="45">45</option>
+                  </select>
+                </div>
+                
+                <button type="submit" class="btn btn-success">Create</button>
+              </form>
+            </div>
+          </div>
+          <div class="col-sm-3"><a href="/faculties/logout" role="button" class="btn btn-info">Logout!</a></div>
+        </div>
+      </div>
+    </div>
+  </div>

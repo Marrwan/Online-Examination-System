@@ -1,0 +1,41 @@
+
+  <div class="container-fluid">
+    <div class="col-sm-4 form-box">
+      <div class="form-top">
+        <div class="form-top-left">
+          <h1>Welcome  <%= User.name %></h1>
+          <%- include('./partials/message'); %>
+          <br>
+          <br>
+          <br>
+        </div>
+      </div>
+    </div>
+<ul class="list-group">
+  <h3>List of Registered Students</h3>
+<% users.forEach((user)=>{%>
+    <li class="list-group-item">
+        <h3>
+            <%= user.name %>
+        </h3>
+        <p>
+            <%= user.email %>
+        </p>
+    </li>
+<%})%>
+</ul>
+<br>
+<br>
+<div class="row text-center book" style="display: flex; flex-wrap:wrap">
+  <h3>List of available courses</h3>
+  <% for(var i = 0; i < course.length; i++){ %>
+      <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"><%= course[i]['coursename'] %></h5>
+            <a href="courses/<%=course[i]._id %>" class="btn btn-info">More info</a>
+          </div>
+        </div>  
+  <%}%>
+</div>
+<a class="btn btn-primary" href="/courses/new">Create new course</a>
+</div>

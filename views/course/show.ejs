@@ -1,0 +1,41 @@
+<div class="card" >
+    <div class="card-body">
+        <%- include('../partials/message'); %>
+      <h5 class="card-title"><%= course['coursename'] %></h5>
+      <h3 class="card-title"><%= course['courseid'] %></h3>
+    </div>
+    <a href="/courses" class="btn btn-primary ">Go Back</a>
+    <%if(User.userType == "admin"){%>
+    <a href="/courses/<%= course._id %>/edit" class="btn btn-secondary">Edit</a>
+    <a href="/courses/<%= course._id %>/registered_students" class="btn btn-info">no of registered_students</a>
+    <a href="/exam/<%= course._id %>/new" class="btn btn-primary">Create Exams</a>
+
+    <form   action="/courses/<%= course._id %>?_method=DELETE" method="post">
+      <button class="btn btn-danger">Delete</button>
+      </form>
+
+      <%}%>
+<%if(User.userType == "student"){%>
+  <%  if(course.registered_students.includes(user._id)){ %>
+ 
+    <% }else{ %>
+      <form  action="/courses/<%= course._id %>/add" method="post">
+          <button class="btn  btn-danger">Register</button>
+        </form>
+   <% }%>
+<%}%>
+</div>
+
+
+<div class="card">
+  <div class="card-body">
+    <h2 class="card-title">List of exams available for <%= course.coursename %></h2>
+  <% if(course.exams.length > 0){ %>
+    <% course.exams.forEach((exam)=>{ %>
+    <a href="/exam/<%= course._id %>/<%= exam._id %>" class="card-title">Exam <%=exam.exam_code %></a><br>
+    <%})%>
+ <%   }else{%>
+      <p class="card-title"><%= course.coursename %> has no exams yet, create one</p>
+      <%  }%>
+  </div>
+</div>

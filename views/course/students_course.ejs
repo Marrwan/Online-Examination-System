@@ -1,0 +1,8 @@
+<div class="container-fluid">
+    <%- include('../partials/message'); %>
+<ul class="list-group">
+<% user.course_list.forEach((course)=>{%>
+    <li class="list-group-item"><%= course.coursename %></li>
+<%})%>
+</ul>
+</div>

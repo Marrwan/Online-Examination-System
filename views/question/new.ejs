@@ -1,0 +1,64 @@
+<!-- Top content-->
+<div class="top-content">
+    <div class="inner-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 col-sm-offset-2 text">
+           <center>
+             <h1><strong>Add Questions to <%= exam.exam_code%> </strong></h1>
+
+           </center> 
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-sm-3"><a href="/admin/home" role="button" class="btn btn-info">Go Back!</a></div>
+          <div class="col-sm-6 form-box">
+            <div class="form-top">
+              <div class="form-top-left">
+                <h3>Add new Question</h3>
+              </div>
+              <%- include('../partials/message'); %>
+            </div>
+            <div class="form-bottom">
+              <form role="form" action="/question/<%= exam._id %>/new" method="post" class="login-form">
+                <div class="form-group">
+                  <label for="form-question" class="sr-only">Question</label>
+                  <textarea id="form-question" type="text" name="question" placeholder="question" class="form-question form-control"  ><%= typeof question != 'undefined' ? question : '' %></textarea>
+                </div>
+                <div class="form-group" style="display: none">
+                  <label for="form-exam_code" class="sr-only">question_code</label>
+                  <input id="form-exam_code" type="text" name="question_code" placeholder="question_code code" class="form-exam_code form-control" value="<%=exam.exam_code%>">
+                </div>
+                <div class="form-group">
+                  <label for="form-optionA" class="sr-only">Option A</label>
+                  <input id="form-optionA" type="text" name="optionA" placeholder="optionA" class="form-optionA form-control" value="<%= typeof optionA != 'undefined' ? optionA : '' %>">
+                </div>
+                <div class="form-group">
+                  <label for="form-optionB" class="sr-only">Option B</label>
+                  <input id="form-optionB" type="text" name="optionB" placeholder="optionB" class="form-optionB form-control" value="<%= typeof optionB != 'undefined' ? optionB : '' %>">
+                </div>
+                <div class="form-group">
+                  <label for="form-optionC" class="sr-only">Option C</label>
+                  <input id="form-optionC" type="text" name="optionC" placeholder="optionC" class="form-optionC form-control" value="<%= typeof optionC != 'undefined' ? optionC : '' %>">
+                </div>
+                <div class="form-group">
+                  <p>Answer</p>
+                  <label for="form-key" class="sr-only">Answer</label>
+                  <select name="Answer">
+                    <option selected disabled>option</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                  </select>
+                </div>
+                
+                <button type="submit" class="btn btn-success">Add</button>
+              </form>
+            </div>
+          </div>
+          <div class="col-sm-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>

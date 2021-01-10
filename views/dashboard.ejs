@@ -1,0 +1,8 @@
+<h1 class="mt-4">Dashboard</h1>
+<p class="lead mb-3">Welcome <%= User.name %></p>
+<%if(User.userType == "admin"){%>
+    <a href="/admin" class="btn btn-outline-secondary">Check admin Dashboard</a>
+<%}%>
+<%if(User.userType == "student"){%>
+    <a href="/student" class="btn btn-outline-secondary">Check student Dashboard</a>
+<%}%>
