@@ -1,15 +1,23 @@
 <div class="container-fluid">
     <%- include('../partials/message'); %>
-    <div class="row text-center book" style="display: flex; flex-wrap:wrap">
-        <% for(var i = 0; i < course.length; i++){ %>
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                  <h5 class="card-title"><%= course[i]['coursename'] %></h5>
-                  <a href="courses/<%=course[i]._id %>" class="btn btn-primary">More info</a>
-                </div>
-              </div>  
-        <%}%>
-</div>
+    <div class="row">
+        <div class="col-sm-3"><a class="btn btn-info" href="/dashboard" role="button">Go Back</a></div>
+    </div>
+    <div class="row">
+       
+      <% for(var i = 0; i < course.length; i++){ %>
+      <div class="col-xl-3 col-md-6">
+          <div class="card bg-success text-white mb-4">
+              <div class="card-body"><%= course[i]['coursename'] %></div>
+              <div class="card-footer d-flex align-items-center justify-content-between">
+                  <a class="small text-white stretched-link" href="courses/<%=course[i]._id %>">View Details</a>
+                  <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+              </div>
+          </div>
+      </div>
+      <%}%>
+      
+    </div>
 <%if(User.userType == "admin"){%>
 <a href="/courses/new">Create new course</a>
 <%}%>

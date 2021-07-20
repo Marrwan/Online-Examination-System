@@ -1,41 +1,56 @@
-<div class="card" >
-    <div class="card-body">
-        <%- include('../partials/message'); %>
-      <h5 class="card-title"><%= course['coursename'] %></h5>
-      <h3 class="card-title"><%= course['courseid'] %></h3>
-    </div>
-    <a href="/courses" class="btn btn-primary ">Go Back</a>
+<a href="/courses" class="btn btn-info ">Go Back</a>
+<div class="card" style="width: 100vw;">
+  <div class="card-body text-center border border-secondary">
+    <%- include('../partials/message'); %>
+    <h2 class="card-title"><%= course['coursename'] %></h2>
+    <h4 class="card-subtitle mb-2 text-muted"><%= course['courseid'] %></h4>
+    <br>
+    <br>
+    <br>
+
+    <!-- If user is an Admin -->
     <%if(User.userType == "admin"){%>
-    <a href="/courses/<%= course._id %>/edit" class="btn btn-secondary">Edit</a>
-    <a href="/courses/<%= course._id %>/registered_students" class="btn btn-info">no of registered_students</a>
-    <a href="/exam/<%= course._id %>/new" class="btn btn-primary">Create Exams</a>
-
-    <form   action="/courses/<%= course._id %>?_method=DELETE" method="post">
-      <button class="btn btn-danger">Delete</button>
+      <a href="/courses/<%= course._id %>/edit" class="d-block btn btn-secondary">Edit</a>
+      <a href="/courses/<%= course._id %>/registered_students" class="d-block btn btn-info">no of registered_students</a>
+      <a href="/exam/<%= course._id %>/new" class="d-block btn btn-primary">Create Exams</a>
+      
+      <form   action="/courses/<%= course._id %>?_method=DELETE" method="post">
+        <button class="btn btn-danger">Delete</button>
       </form>
-
-      <%}%>
-<%if(User.userType == "student"){%>
-  <%  if(course.registered_students.includes(user._id)){ %>
- 
-    <% }else{ %>
-      <form  action="/courses/<%= course._id %>/add" method="post">
-          <button class="btn  btn-danger">Register</button>
-        </form>
-   <% }%>
-<%}%>
-</div>
-
-
-<div class="card">
-  <div class="card-body">
-    <h2 class="card-title">List of exams available for <%= course.coursename %></h2>
-  <% if(course.exams.length > 0){ %>
-    <% course.exams.forEach((exam)=>{ %>
-    <a href="/exam/<%= course._id %>/<%= exam._id %>" class="card-title">Exam <%=exam.exam_code %></a><br>
-    <%})%>
- <%   }else{%>
-      <p class="card-title"><%= course.coursename %> has no exams yet, create one</p>
-      <%  }%>
-  </div>
-</div>
+    
+      <br>
+      <div class="card">
+        <div class="card-body">
+          <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">List of exams available for <%= course.coursename %></li>
+        </ol>
+          <% if(course.exams.length > 0){ %>
+            <% course.exams.forEach((exam)=>{ %>
+              <a href="/exam/<%= course._id %>/<%= exam._id %>" class="card-title">Exam <%=exam.exam_code %></a><br>
+              <%})%>
+              <%   }else{%>
+                <p class="card-title"><%= course.coursename %> has no exams yet, create one</p>
+                <%  }%>
+              </div>
+            </div>
+            <%}%>
+            
+            <!-- If user is a student -->
+            <%if(User.userType == "student"){%>
+              <%  if(course.registered_students.includes(user._id)){ %>
+                    <%var random = Math.floor(Math.random() * course.exams.length)%>
+                    <% if(course.exams.length > 0){ %>
+                     <h2><a class="card-link" href="/exam/<%= course._id %>/<%= course.exams[random]._id %>/exam">Take Exam</a>
+                     </h2> 
+                      <%   }else{%>
+                        <p class="card-title"><%= course.coursename %> has no exams yet, check back later</p>
+                        <%  }%>
+                     
+                    <% }else{ %>
+                      <form  action="/courses/<%= course._id %>/add" method="post">
+                        <button class="btn  btn-danger">Register</button>
+                      </form>
+                      <% }%>
+                      <%}%>
+                      </div>
+                    </div>

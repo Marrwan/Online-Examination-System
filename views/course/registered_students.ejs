@@ -1,5 +1,10 @@
+
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3"><a class="btn btn-info" href="/courses/<%=course._id %>" role="button">Go Back!</a></div>
+    </div>
     <%- include('../partials/message'); %>
+
 <ul class="list-group">
 <% course.registered_students.forEach((user)=>{%>
     <li class="list-group-item">

@@ -1,3 +1,8 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3"><a class="btn btn-info" href="/courses/<%=course._id %>" role="button">Go Back!</a></div>
+</div>
+</div>
 <div class="card">
     <div class="card-body">
       <%- include('../partials/message'); %>
@@ -5,7 +10,10 @@
       <%if(User.userType == "admin"){%>
     <% if(exam.questions.length > 0){ %>
       <% exam.questions.forEach((question,no)=>{ %>
-      <a href="/question/<%= course._id %>/<%= exam._id %>/<%= question._id%>" class="card-title">Question <%=no+1%>: <%=question.question %></a><br>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item"><a href="/question/<%= course._id %>/<%= exam._id %>/<%= question._id%>">Question <%=no+1%>: <%=question.question %></a></li>
+        </ul>
+     
       <%})%>
    <%   }else{%>
         <p class="card-title"><%= exam.exam_code %> has no question yet, create one</p>
@@ -21,5 +29,6 @@
   <%}%>
   
   <%if(User.userType == "student"){%>
+    
     <a href="/exam/<%= course._id %>/<%= exam._id %>/exam">Take Exam</a>
     <%}%>

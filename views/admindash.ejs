@@ -1,41 +1,104 @@
 
-  <div class="container-fluid">
-    <div class="col-sm-4 form-box">
-      <div class="form-top">
-        <div class="form-top-left">
-          <h1>Welcome  <%= User.name %></h1>
+ 
+      
           <%- include('./partials/message'); %>
-          <br>
-          <br>
-          <br>
-        </div>
+     
+  <div id="layoutSidenav">
+      <div id="layoutSidenav_content">
+          <main>
+              <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-3"><a class="btn btn-info" href="/" role="button">Go Home</a></div>
+                </div>
+                  <h1 class="mt-4">Admin Dashboard</h1>
+                  <ol class="breadcrumb mb-4">
+                      <li class="breadcrumb-item active">List of available courses</li>
+                  </ol>
+                  <div class="row">
+                      <% for(var i = 0; i < course.length; i++){ %>
+                      <div class="col-xl-3 col-md-6">
+                          <div class="card bg-success text-white mb-4">
+                              <div class="card-body"><%= course[i]['coursename'] %></div>
+                              <div class="card-footer d-flex align-items-center justify-content-between">
+                                  <a class="small text-white stretched-link" href="courses/<%=course[i]._id %>">View Details</a>
+                                  <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                              </div>
+                          </div>
+                      </div>
+                      <%}%>
+                      
+                    </div>
+                    <a class="btn btn-primary" href="/courses/new">Create new course</a>
+                <br><br>
+                  <div class="card mb-4">
+                      <div class="card-header">
+                          <i class="fas fa-table mr-1"></i>
+                         List of Registered Students
+                      </div>
+                      <div class="card-body">
+                          <div class="table-responsive">
+                              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                  <thead>
+                                      <tr>
+                                          <th>Name</th>
+                                          <th>Class</th>
+                                          <th>Gender</th>
+                                          <th>Email</th>
+                                          <th>age</th>
+                                        
+                                      </tr>
+                                  </thead>
+                                  <tfoot>
+                                      <tr>
+                                          <th>Name</th>
+                                          <th>Class</th>
+                                          <th>Gender</th>
+                                          <th>Email</th>
+                                          <th>age</th>
+                                          
+                                      </tr>
+                                  </tfoot>
+                                  <tbody>
+                                    <% users.forEach((user)=>{%>
+                                        <% if(user.gender == "Male"){ %>
+                                            <tr class="text-info">
+                                                <td><%=user.name%></td>
+                                                <td><%=user.class%></td>
+                                                <td><%=user.gender%></td>
+                                                <td><%=user.email%></td>
+                                                <td><%=user.age%></td>
+                                        
+                                            </tr>
+                                       <% }else{ %>
+                                            <tr class="text-danger">
+                                                <td><%=user.name%></td>
+                                                <td><%=user.class%></td>
+                                                <td><%=user.gender%></td>
+                                                <td><%=user.email%></td>
+                                                <td><%=user.age%></td>
+                                               
+                                            </tr>
+                                      <%  }%>
+                                      
+                                      <%})%>
+                                  </tbody>
+                              </table>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </main>
+          <footer class="py-4 bg-light mt-auto">
+              <div class="container-fluid">
+                  <div class="d-flex align-items-center justify-content-between small">
+                      <div class="text-muted">Copyright &copy; Online Exam 2021</div>
+                      <div>
+                          <a href="#">Privacy Policy</a>
+                          &middot;
+                          <a href="#">Terms &amp; Conditions</a>
+                      </div>
+                  </div>
+              </div>
+          </footer>
       </div>
-    </div>
-<ul class="list-group">
-  <h3>List of Registered Students</h3>
-<% users.forEach((user)=>{%>
-    <li class="list-group-item">
-        <h3>
-            <%= user.name %>
-        </h3>
-        <p>
-            <%= user.email %>
-        </p>
-    </li>
-<%})%>
-</ul>
-<br>
-<br>
-<div class="row text-center book" style="display: flex; flex-wrap:wrap">
-  <h3>List of available courses</h3>
-  <% for(var i = 0; i < course.length; i++){ %>
-      <div class="card" style="width: 18rem;">
-          <div class="card-body">
-            <h5 class="card-title"><%= course[i]['coursename'] %></h5>
-            <a href="courses/<%=course[i]._id %>" class="btn btn-info">More info</a>
-          </div>
-        </div>  
-  <%}%>
-</div>
-<a class="btn btn-primary" href="/courses/new">Create new course</a>
-</div>
+  </div>
