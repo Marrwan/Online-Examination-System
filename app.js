@@ -6,13 +6,13 @@ passport = require("passport");
 flash = require("connect-flash");
 session = require("express-session");
 methodOverride = require("method-override");
-_ = require('lodash');
-array = require('lodash/array');
+_ = require("lodash");
+array = require("lodash/array");
 seedDB = require("./seeds");
 var app = express();
 
 //seeds data into the database
-seedDB()
+seedDB();
 //database
 const db = require("./config/keys").mongoURI;
 
@@ -30,6 +30,7 @@ mongoose
   .then(() => console.log("Database Connected succesfully"))
   .catch((err) => console.log(err));
 
+// app.use(cors);
 //EJS
 app.use(expressLayouts);
 app.set("view engine", "ejs");
@@ -48,6 +49,7 @@ app.use(
     saveUninitialized: true,
   })
 );
+
 // Passport MiddleWare
 app.use(passport.initialize());
 app.use(passport.session());
@@ -69,4 +71,4 @@ app.use("/courses", require("./Routes/courses"));
 app.use("/question", require("./Routes/question"));
 app.use("/exam", require("./Routes/exam"));
 
-app.listen("3000", () => console.log("listening at 3000"));
+app.listen("3000", () => console.log(`listening at https://localhost:3000`));
