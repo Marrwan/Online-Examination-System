@@ -9,9 +9,38 @@ var admin = {
 };
 
 var students = [
-  { name: "Abdulbasit Alabi", email: "Abdul@gmail.com", password: "1234567" },
-  { name: "Tope Alabi", email: "Tope@gmail.com", password: "1234567" },
-  { name: "Maryam Audu", email: "Maryam@gmail.com", password: "1234567" },
+  {
+    name: "Maryam ",
+    email: "Marya@gmail.com",
+    password: "1234567",
+    age: 18,
+    gender: "Female",
+    class: "SS3",
+  },
+  {
+    name: "Abdulbasit Alabi",
+    email: "Abdul@gmail.com",
+    password: "1234567",
+    age: 20,
+    gender: "Male",
+    class: "Undergrad",
+  },
+  {
+    name: "Tope Alabi",
+    email: "Tope@gmail.com",
+    password: "1234567",
+    age: 38,
+    gender: "Female",
+    class: "Postgrad",
+  },
+  {
+    name: "Maryam Audu",
+    email: "Maryam@gmail.com",
+    password: "1234567",
+    age: 12,
+    gender: "Female",
+    class: "JSS2",
+  },
 ];
 
 function seedDB() {

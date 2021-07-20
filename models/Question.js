@@ -24,7 +24,7 @@ var QuestionSchema = new mongoose.Schema({
   },
   Answer: {
     type: String,
-    enum: ["A", "B", "C"],
+    enum: ["optionA", "optionB", "optionC"],
     required: true,
   },
 });
