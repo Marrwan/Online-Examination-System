@@ -107,10 +107,10 @@ router.get("/:Cid/:Eid/edit", isLoggedIn, isAdmin, (req, res) => {
     if (err) throw err;
     Exam.findById(req.params.Eid, (err, exam) => {
       if (err) {
-        console.log(err);
         res.redirect(`/exam/${req.params.id}`);
       } else {
-        res.render("exam/edit", { exam, course });
+        res.json(exam.questions)
+        // res.render("exam/edit", { exam, course });
       }
     });
   });
@@ -200,6 +200,17 @@ router.get("/:Cid/:Eid/exam", (req, res) => {
       .populate("questions")
       .exec((err, exam) => {
         res.render("exam/takeExam", { course, exam });
+        // res.json(exam.questions)
+      });
+  });
+});
+router.get("/:Cid/:Eid/exam/exam", (req, res) => {
+  Course.findById(req.params.Cid, (err, course) => {
+    Exam.findById(req.params.Eid)
+      .populate("questions")
+      .exec((err, exam) => {
+        // res.render("exam/takeExam", { course, exam });
+        res.json(exam.questions)
       });
   });
 });

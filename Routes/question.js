@@ -107,22 +107,34 @@ router.get("/:Cid/:Eid/:Qid", isLoggedIn, isAdmin, (req, res) => {
 });
 
 // DELETE ROUTE- delete a specific question
-router.delete("/:Cid/:Eid/:Qid", isLoggedIn, isAdmin, (req, res) => {
-  Exam.findById(req.params.Eid)
-    .populate("questions")
-    .exec((err, exam) => {
-      Question.findByIdAndRemove(req.params.Qid, (err, question) => {
-        if (err) throw err;
-        _.remove(exam.questions, (question) => {
-          return question._id == req.params.Qid;
-        });
-        exam.save((err, exam) => {
-          console.log(exam);
-          req.flash("success_msg", `Question deleted`);
+router.delete("/:Cid/:Eid/:Qid", isLoggedIn, isAdmin, async function(req, res){
+  try {
+    const exam = await Exam.findByIdAndUpdate(req.params.Eid, {$pull : {questions: req.params.Qid},},{new: true});
+    if(!exam){
+      return res.status(400).send('Exam not found')
+    }
+    await Question.findByIdAndDelete(req.params.Qid)
+    req.flash("success_msg", `Question deleted`);
           res.redirect(`/exam/${req.params.Cid}/${req.params.Eid}`);
-        });
-      });
-    });
+  }catch(err){
+    console.log(err);
+    res.status(500).send("Something went wrong");
+  }
+  // Exam.findById(req.params.Eid)
+  //   .populate("questions")
+  //   .exec((err, exam) => {
+  //     Question.findByIdAndRemove(req.params.Qid, (err, question) => {
+  //       if (err) throw err;
+  //       _.remove(exam.questions, (question) => {
+  //         return question._id == req.params.Qid;
+  //       });
+  //       exam.save((err, exam) => {
+  //         console.log(exam);
+  //         req.flash("success_msg", `Question deleted`);
+  //         res.redirect(`/exam/${req.params.Cid}/${req.params.Eid}`);
+  //       });
+  //     });
+  //   });
 });
 
 //  UPDATE ROUTE- Show form to edit question

@@ -147,7 +147,7 @@ router.put("/:id", isLoggedIn, isAdmin, (req, res) => {
 });
 
 //delete a specific course
-router.delete("/:id", (req, res) => {
+router.delete("/:id", async (req, res) => {
   Course.findByIdAndRemove(req.params.id, (err, deleted) => {
     if (err) {
       res.redirect("/courses");
